@@ -20,7 +20,7 @@
             "outputPath": "dist/stock-control",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "basehref": "stock-control",
+            "basehref": "/stock-control/",
             "polyfills": [
               "zone.js"
             ],
