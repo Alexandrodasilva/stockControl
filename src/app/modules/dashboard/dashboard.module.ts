@@ -7,11 +7,12 @@ import { RouterModule } from '@angular/router';
 import { DASHBOARD_ROUTES } from './dashboard.routing';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
-import { ToolbarModule } from 'primeng/Toolbar';
+import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
-
+import { ChartModule } from 'primeng/chart';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -29,6 +30,9 @@ import { CookieService } from 'ngx-cookie-service';
        ToolbarModule,
        ToastModule,
        CardModule,
+       ChartModule,
+       //shared
+       SharedModule
   ],
   providers: [MessageService, CookieService]
 })
