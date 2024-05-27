@@ -82,9 +82,9 @@ export class DashboardHomeComponent implements OnInit, OnDestroy{
           x: {
             ticks: {
               color: textColorSecondary,
-              // font: {
-              //   weight: '500',
-              // },
+              font: {
+                weight : "normal",
+              },
             },
             grid: {
               color: surfacceBorder,
