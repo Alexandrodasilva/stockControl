@@ -43,6 +43,7 @@
                   styleClass="p-button-info"
                   icon="pi pi-plus"
                   label="Adcionar"
+                  (onClick)="handleCategoryEvent(addCategoryAction)"
                 ></p-button>
               </div>
             </th>
@@ -70,6 +71,7 @@
                   class="p-button-rounded p-button-danger"
                   pTooltip="remover Categoria"
                   tooltipPosition="top"
+                  (click)="handleDeleteCategoryEvent(category?.id, category?.name)"
                 ></button>
               </div>
             </td>
