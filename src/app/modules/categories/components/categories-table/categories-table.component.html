@@ -62,7 +62,7 @@
                   class="p-button-rounded p-button-warning"
                   pTooltip="Editar Categoria"
                   tooltipPosition="top"
-
+                  (click)="handleCategoryEvent(editCategoryAction, category?.id, category?.name)"
                 ></button>
                 <button
                   pButton
