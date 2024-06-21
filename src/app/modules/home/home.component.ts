@@ -1,7 +1,7 @@
 import { MessageService } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from './../../services/user/user.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthRequest } from 'src/app/models/interface/auth/AuthRequest';
 import { signupUserReq } from 'src/app/models/interface/user/SignupUserReq';
@@ -13,7 +13,11 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnDestroy{
+export class HomeComponent implements OnDestroy, AfterViewInit {
+  @ViewChild('emailInput') public emailInputRef!: ElementRef;
+  @ViewChild('passwordInput') public passworInputRef!: ElementRef;
+
+
   loginCard: boolean = true;
   private destroy$ = new Subject<void>();
   loginForm = this.formBuilder.group({
@@ -33,17 +37,23 @@ export class HomeComponent implements OnDestroy{
     private cookieService: CookieService,
     private messageService: MessageService,
     private router: Router
-    ){
+  ) {
 
-    }
+  }
+  ngAfterViewInit(): void {
+    //view child
+    // this.emailInputRef.nativeElement.value = 'seu emai aqui';
+    // console.log(this.emailInputRef.nativeElement.value)
+    // console.log(this.passworInputRef.nativeElement)
+  }
 
-  onSubmitLoginForm(): void{
-    if(this.loginForm.value && this.loginForm.valid){
+  onSubmitLoginForm(): void {
+    if (this.loginForm.value && this.loginForm.valid) {
       this.userService.authUser(this.loginForm.value as AuthRequest)
-      .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (Response) =>{
-            if(Response){
+          next: (Response) => {
+            if (Response) {
               this.cookieService.set('USER_INFO', Response?.token);
               this.loginForm.reset();
               this.router.navigate(['/dashboard']);
@@ -67,14 +77,14 @@ export class HomeComponent implements OnDestroy{
         });
     }
   }
-  onSubmitSignUpForm(): void{
-    if(this.signUpForm.value && this.signUpForm.valid){
+  onSubmitSignUpForm(): void {
+    if (this.signUpForm.value && this.signUpForm.valid) {
       this.userService.signupUser(this.signUpForm.value as signupUserReq)
-      .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (response) =>{
-            if(response)
-            this.signUpForm.reset();
+          next: (response) => {
+            if (response)
+              this.signUpForm.reset();
             this.loginCard = true;
             this.messageService.add({
               severity: 'success',
